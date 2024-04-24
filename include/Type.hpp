@@ -76,7 +76,8 @@ inline static constexpr auto is_RAD_type()
 {
     using std::is_same;
     using namespace Type;
-    return  is_same<T_, null>() || is_same<T_, b>() || is_same<T_, u8>() || is_same<T_, u16>() || is_same<T_, u32>() ||
+    return  is_same<T_, null>() || is_same<T_, b>() ||
+            is_same<T_, u8>() || is_same<T_, u16>() || is_same<T_, u32>() || is_same<T_, u64>() ||
             is_same<T_, f32>() || is_same<T_, f64>() || is_same<T_, str>();
 }
 
