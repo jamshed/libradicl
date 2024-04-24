@@ -9,6 +9,8 @@
 #include <cstring>
 #include <cstdlib>
 #include <fstream>
+#include <type_traits>
+#include <cassert>
 
 
 namespace RAD
@@ -27,7 +29,10 @@ private:
 
 
     void flush();
-    
+
+    template <typename T_>
+    void add_POD(const T_& val);
+
 public:
 
     Buffer(std::size_t cap, std::ofstream& os);
@@ -47,9 +52,24 @@ public:
 template <typename T_>
 inline void Buffer::add(const T_& val)
 {
+    if constexpr(std::is_pod<T_>())
+        add_POD(val);
+    else
+    {
+        add(val.size());
+        for(const auto& v : val)
+            add(v);  
+    }  
+}
+
+
+template <typename T_>
+inline void Buffer::add_POD(const T_& val)
+{
     if(sz + sizeof(val) >= cap)
         flush();
 
+    assert(sz + sizeof(val) <= cap);
     std::memcpy(reinterpret_cast<char*>(buf + sz), reinterpret_cast<const char*>(&val), sizeof(val));
     sz += sizeof(val);    
 }
