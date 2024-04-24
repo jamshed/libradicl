@@ -3,7 +3,8 @@ set(INCLUDE_DIR ${CMAKE_SOURCE_DIR}/include)
 
 
 set(SRC
-        libradicl.cpp
+        Header.cpp
+        RAD_Writer.cpp
 )
 
 
