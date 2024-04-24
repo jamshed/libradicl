@@ -68,15 +68,16 @@ typedef RAD_Type<double> f64;
 // TODO: no support for arbitrary arrays as of now.
 typedef RAD_Type<std::string> str;
 
+}
+
 
 template <typename T_>
 inline static constexpr auto is_RAD_type()
 {
     using std::is_same;
+    using namespace Type;
     return  is_same<T_, null>() || is_same<T_, b>() || is_same<T_, u8>() || is_same<T_, u16>() || is_same<T_, u32>() ||
             is_same<T_, f32>() || is_same<T_, f64>() || is_same<T_, str>();
-}
-
 }
 
 }

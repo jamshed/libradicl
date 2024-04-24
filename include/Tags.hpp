@@ -31,13 +31,13 @@ private:
 public:
 
     template <typename T_>
-    void add_file_tag(const std::string& name) { static_assert(RAD::Type::is_RAD_type<T_>()); file_tag.emplace_back(name, T_::type_id()); }
+    void add_file_tag(const std::string& name) { static_assert(is_RAD_type<T_>()); file_tag.emplace_back(name, T_::type_id()); }
 
     template <typename T_>
-    void add_read_tag(const std::string& name) { static_assert(RAD::Type::is_RAD_type<T_>()); read_tag.emplace_back(name, T_::type_id()); }
+    void add_read_tag(const std::string& name) { static_assert(is_RAD_type<T_>()); read_tag.emplace_back(name, T_::type_id()); }
 
     template <typename T_>
-    void add_aln_tag(const std::string& name)  { static_assert(RAD::Type::is_RAD_type<T_>()); aln_tag.emplace_back(name, T_::type_id()); }
+    void add_aln_tag(const std::string& name)  { static_assert(is_RAD_type<T_>()); aln_tag.emplace_back(name, T_::type_id()); }
 };
 
 }
