@@ -4,6 +4,8 @@
 
 
 
+#include "Type.hpp"
+
 #include <cstdint>
 #include <cstddef>
 #include <cstring>
@@ -28,10 +30,9 @@ private:
     std::ofstream& os;
 
 
-    void flush();
+    template <typename T_> void add_POD(T_ val);
 
-    template <typename T_>
-    void add_POD(const T_& val);
+    void flush();
 
 public:
 
@@ -44,34 +45,38 @@ public:
 
     ~Buffer();
 
-    template <typename T_>
-    void add(const T_& val);
+    template <typename T_> void add(const T_& val);
 };
 
 
 template <typename T_>
 inline void Buffer::add(const T_& val)
 {
-    if constexpr(std::is_pod<T_>())
-        add_POD(val);
-    else
-    {
-        add(val.size());
-        for(const auto& v : val)
-            add(v);  
-    }  
+    static_assert(is_RAD_type<T_>());
+    add_POD(val.val());
+}
+
+
+template <>
+inline void Buffer::add<Type::str>(const Type::str& val)
+{
+    add(Type::u16(val.val().length()));
+    for(const auto v : val.val())
+        add_POD(v);
 }
 
 
 template <typename T_>
-inline void Buffer::add_POD(const T_& val)
+inline void Buffer::add_POD(const T_ val)
 {
-    if(sz + sizeof(val) >= cap)
+    static_assert(std::is_pod<T_>());
+
+    if(sz + sizeof(val) > cap)
         flush();
 
     assert(sz + sizeof(val) <= cap);
     std::memcpy(reinterpret_cast<char*>(buf + sz), reinterpret_cast<const char*>(&val), sizeof(val));
-    sz += sizeof(val);    
+    sz += sizeof(val);
 }
 
 
