@@ -10,6 +10,9 @@ RAD_Writer::RAD_Writer(const Header& header, const Tag_Defn& tag_defn, const std
     , tag_defn(tag_defn)
     , output(op_file_path, std::ios::out | std::ios::binary)
     , buf(buf_cap, output)
-{}
+{
+    header.write(buf);
+    tag_defn.write(buf);
+}
 
 }

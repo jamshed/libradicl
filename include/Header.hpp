@@ -5,6 +5,7 @@
 
 
 #include "Type.hpp"
+#include "Buffer.hpp"
 
 #include <cstdint>
 #include <vector>
@@ -32,6 +33,8 @@ public:
     Header(Header&&) = default;
     Header& operator=(const Header&) = default;
     Header& operator=(Header&&) = default;
+
+    void write(Buffer& buf) const;
 };
 
 }

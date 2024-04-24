@@ -19,4 +19,14 @@ Header::Header(const bool is_paired, const uint64_t ref_count, const std::vector
     assert(ref_names.size() == ref_count);
 }
 
+
+void Header::write(Buffer& buf) const
+{
+    buf.add(is_paired);
+    buf.add(ref_count);
+    for(const auto& v : ref_names)
+        buf.add(v);
+    buf.add(num_chunks);
+}
+
 }

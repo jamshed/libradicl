@@ -5,6 +5,7 @@
 
 
 #include "Type.hpp"
+#include "Buffer.hpp"
 
 #include <cstdint>
 #include <cstddef>
@@ -21,7 +22,7 @@ class Tag_Defn
 {
 private:
 
-    typedef std::pair<std::string, uint8_t> tag_desc;
+    typedef std::pair<Type::str, Type::u8> tag_desc;
 
     std::vector<tag_desc> file_tag;
     std::vector<tag_desc> read_tag;
@@ -38,6 +39,8 @@ public:
 
     template <typename T_>
     void add_aln_tag(const std::string& name)  { static_assert(is_RAD_type<T_>()); aln_tag.emplace_back(name, T_::type_id()); }
+
+    void write(Buffer& buf) const;
 };
 
 }
