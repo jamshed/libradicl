@@ -15,26 +15,58 @@ namespace RAD
 namespace Type
 {
 
-struct null {                   static constexpr uint8_t type_id() { return 255; } };
+// Allowed types in a RAD file.
+template <typename T_>
+class RAD_Type
+{
+private:
 
-struct b    { bool val;         static constexpr uint8_t type_id() { return 0; } };
+    T_ val_;
 
-struct u8   { uint8_t val;      static constexpr uint8_t type_id() { return 1; } };
+public:
 
-struct u16  { uint16_t val;     static constexpr uint8_t type_id() { return 2; } };
+    RAD_Type(const T_ val): val_(val) {}
 
-struct u32  { uint32_t val;     static constexpr uint8_t type_id() { return 3; } };
+    auto val() const { return val_; }
 
-struct u64  { uint64_t val;     static constexpr uint8_t type_id() { return 4; } };
+    static constexpr uint8_t type_id()
+    {
+        using std::is_same;
 
-struct f32  { float val;        static constexpr uint8_t type_id() { return 5; } };
+        if constexpr(is_same<T_, void>())           return 255;
+        if constexpr(is_same<T_, bool>())           return 0;
+        if constexpr(is_same<T_, uint8_t>())        return 1;
+        if constexpr(is_same<T_, uint16_t>())       return 2;
+        if constexpr(is_same<T_, uint32_t>())       return 3;
+        if constexpr(is_same<T_, uint64_t>())       return 4;
+        if constexpr(is_same<T_, float>())          return 5;
+        if constexpr(is_same<T_, double>())         return 6;
+        // TODO: no support for arbitrary arrays as of now.
+        if constexpr(is_same<T_, std::string>())    return 8;
 
-struct f64  { double val;       static constexpr uint8_t type_id() { return 6; } };
+        return 255;
+    }
+};
 
-// template <typename T_1, typename T_2>
-struct arr  { /* TODO ;*/       static constexpr uint8_t type_id() { return 7; } };
+template <>
+class RAD_Type<void>
+{
+public:
 
-struct str  { std::string val;  static constexpr uint8_t type_id() { return 8; } };
+    static constexpr uint8_t type_id() { return 255; }
+};
+
+
+typedef RAD_Type<void> null;
+typedef RAD_Type<bool> b;
+typedef RAD_Type<uint8_t> u8;
+typedef RAD_Type<uint16_t> u16;
+typedef RAD_Type<uint32_t> u32;
+typedef RAD_Type<uint64_t> u64;
+typedef RAD_Type<float> f32;
+typedef RAD_Type<double> f64;
+// TODO: no support for arbitrary arrays as of now.
+typedef RAD_Type<std::string> str;
 
 
 template <typename T_>
@@ -42,7 +74,7 @@ inline static constexpr auto is_RAD_type()
 {
     using std::is_same;
     return  is_same<T_, null>() || is_same<T_, b>() || is_same<T_, u8>() || is_same<T_, u16>() || is_same<T_, u32>() ||
-            is_same<T_, f32>() || is_same<T_, f64>() || is_same<T_, arr>() || is_same<T_, str>();
+            is_same<T_, f32>() || is_same<T_, f64>() || is_same<T_, str>();
 }
 
 }
