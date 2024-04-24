@@ -6,6 +6,7 @@
 
 #include <string>
 #include <cstdint>
+#include <type_traits>
 
 
 namespace RAD
@@ -34,6 +35,15 @@ struct f64  { double val;       static constexpr uint8_t type_id() { return 6; }
 struct arr  { /* TODO ;*/       static constexpr uint8_t type_id() { return 7; } };
 
 struct str  { std::string val;  static constexpr uint8_t type_id() { return 8; } };
+
+
+template <typename T_>
+inline static constexpr auto is_RAD_type()
+{
+    using std::is_same;
+    return  is_same<T_, null>() || is_same<T_, b>() || is_same<T_, u8>() || is_same<T_, u16>() || is_same<T_, u32>() ||
+            is_same<T_, f32>() || is_same<T_, f64>() || is_same<T_, arr>() || is_same<T_, str>();
+}
 
 }
 
