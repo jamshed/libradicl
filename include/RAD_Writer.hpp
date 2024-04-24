@@ -4,9 +4,11 @@
 
 
 
+#include "Buffer.hpp"
 #include "Header.hpp"
 #include "Tags.hpp"
 
+#include <cstddef>
 #include <string>
 #include <fstream>
 
@@ -23,15 +25,13 @@ private:
 
     std::ofstream output;
 
+    static constexpr std::size_t buf_cap_default = 4 * 1024;    // 4 KB.
+    Buffer buf;
+
 
 public:
 
-    RAD_Writer(const Header& header, const Tag_Defn& tag_defn, const std::string& op_file_path);
-
-    RAD_Writer(const RAD_Writer&) = delete;
-    RAD_Writer(RAD_Writer&&) = default;
-    RAD_Writer& operator=(const RAD_Writer&) = delete;
-    RAD_Writer& operator=(RAD_Writer&&) = delete;
+    RAD_Writer(const Header& header, const Tag_Defn& tag_defn, const std::string& op_file_path, std::size_t buf_cap = buf_cap_default);
 };
 
 }

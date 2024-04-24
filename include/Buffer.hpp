@@ -32,6 +32,11 @@ public:
 
     Buffer(std::size_t cap, std::ofstream& os);
 
+    Buffer(const Buffer&) = delete;
+    Buffer& operator=(const Buffer&) = delete;
+    Buffer(Buffer&&) = delete;
+    Buffer& operator=(Buffer&&) = delete;
+
     ~Buffer();
 
     template <typename T_>
