@@ -58,6 +58,11 @@ inline void Buffer::add(const T_& val)
 
 
 template <>
+inline void Buffer::add<Type::null>(const Type::null&)
+{}
+
+
+template <>
 inline void Buffer::add<Type::str>(const Type::str& val)
 {
     add(Type::u16(val.val().length()));
