@@ -4,6 +4,8 @@ set(INCLUDE_DIR ${CMAKE_SOURCE_DIR}/include)
 
 set(SRC
         Header.cpp
+        Tags.cpp
+        Buffer.cpp
         RAD_Writer.cpp
 )
 
