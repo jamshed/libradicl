@@ -4,6 +4,8 @@
 
 
 
+#include "boost/variant/variant.hpp"
+
 #include <string>
 #include <cstdint>
 #include <type_traits>
@@ -67,6 +69,9 @@ typedef RAD_Type<float> f32;
 typedef RAD_Type<double> f64;
 // TODO: no support for arbitrary arrays as of now.
 typedef RAD_Type<std::string> str;
+
+
+typedef boost::variant<Type::null, Type::b, Type::u8, Type::u16, Type::u64, Type::f32, Type::f64, Type::str> variant_t;
 
 }
 

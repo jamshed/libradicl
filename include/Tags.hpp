@@ -6,7 +6,6 @@
 
 #include "Type.hpp"
 #include "Buffer.hpp"
-#include "boost/variant/variant.hpp"
 
 #include <cstdint>
 #include <cstddef>
@@ -50,7 +49,7 @@ class Tag_List
 {
 private:
 
-    typedef boost::variant<Type::null, Type::b, Type::u8, Type::u16, Type::u64, Type::f32, Type::f64, Type::str> Tag;
+    typedef Type::variant_t Tag;
     std::vector<Tag> tag;
 
 
