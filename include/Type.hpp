@@ -27,9 +27,13 @@ private:
 
 public:
 
+    RAD_Type() {}
+
     RAD_Type(const T_ val): val_(val) {}
 
     auto val() const { return val_; }
+
+    auto operator()() const { return val_; }
 
     static constexpr uint8_t type_id()
     {
