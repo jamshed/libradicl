@@ -5,6 +5,8 @@
 
 
 #include "Type.hpp"
+#include "Byte_Array.hpp"
+#include "Alignment_Record.hpp"
 
 #include <cstdint>
 #include <vector>
@@ -20,7 +22,8 @@ private:
 
     Type::u32 aln_count;    // Number of alignment records to follow for this read.
     Type::u16 read_len; // Currently don’t support reads > 65,536bp.
-    std::vector<Type::variant_t> tag;   // Array of specified read-level tags for this read.
+
+    Byte_Array byte_arr;
 
 
 public:
@@ -29,6 +32,8 @@ public:
 
     template <typename T_tag_>
     void add_tag(const T_tag_& val);
+
+    void add_aln_rec(const Aln_Record& aln_rec);
 };
 
 
@@ -36,7 +41,10 @@ inline void Single_End_Read::set(const uint32_t aln_count, const uint16_t read_l
 {
     this->aln_count = aln_count;
     this->read_len = read_len;
-    tag.clear();
+
+    byte_arr.clear();
+    byte_arr.add(this->aln_count);
+    byte_arr.add(this->read_len);
 }
 
 
@@ -45,7 +53,13 @@ inline void Single_End_Read::add_tag(const T_tag_& val)
 {
     static_assert(is_RAD_type<T_tag_>());
 
-    tag.emplace_back(val);
+    byte_arr.add(val);
+}
+
+
+inline void Single_End_Read::add_aln_rec(const Aln_Record& aln_rec)
+{
+    aln_rec.dump(byte_arr);
 }
 
 }

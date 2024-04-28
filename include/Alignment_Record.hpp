@@ -6,6 +6,7 @@
 
 #include "Type.hpp"
 #include "Tags.hpp"
+#include "Byte_Array.hpp"
 
 #include <cstdint>
 #include <vector>
@@ -30,6 +31,8 @@ public:
 
     template <typename T_tag_>
     void add_tag(const T_tag_& val);
+
+    void dump(Byte_Array& byte_arr) const;
 };
 
 
@@ -48,6 +51,14 @@ inline void Aln_Record::add_tag(const T_tag_& val)
     static_assert(is_RAD_type<T_tag_>());
 
     tag.add(val);
+}
+
+
+inline void Aln_Record::dump(Byte_Array& byte_arr) const
+{
+    byte_arr.add(ref_id);
+    byte_arr.add(aln_type);
+    byte_arr.add(tag);
 }
 
 }
