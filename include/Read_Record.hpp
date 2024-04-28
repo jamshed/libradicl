@@ -36,7 +36,6 @@ inline void Single_End_Read::set(const uint32_t aln_count, const uint16_t read_l
 {
     this->aln_count = aln_count;
     this->read_len = read_len;
-
     tag.clear();
 }
 
