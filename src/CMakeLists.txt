@@ -6,6 +6,7 @@ set(SRC
         Header.cpp
         Tags.cpp
         Buffer.cpp
+        Byte_Array.cpp
         RAD_Writer.cpp
 )
 
