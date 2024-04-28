@@ -53,18 +53,19 @@ private:
     std::vector<Tag> tag;
 
 
+    template <typename T_sink_>
     class Writer : public boost::static_visitor<>
     {
     private:
 
-        Buffer& buf;
+        T_sink_& sink;
 
     public:
 
-        Writer(Buffer& buf): buf(buf) {}
+        Writer(T_sink_& sink): sink(sink) {}
 
         template <typename T_>
-        void operator()(const T_& operand) const { buf.add(operand); }
+        void operator()(const T_& operand) const { sink.add(operand); }
     };
 
 
@@ -74,13 +75,15 @@ public:
 
     void clear() { tag.clear(); }
 
-    void write(Buffer& buf) const;
+    template <typename T_sink_>
+    void write(T_sink_& sink) const;
 };
 
 
-inline void Tag_List::write(Buffer& buf) const
+template <typename T_sink_>
+inline void Tag_List::write(T_sink_& sink) const
 {
-    Writer writer(buf);
+    Writer<T_sink_> writer(sink);
     std::for_each(tag.cbegin(), tag.cend(), boost::apply_visitor(writer));
 }
 
