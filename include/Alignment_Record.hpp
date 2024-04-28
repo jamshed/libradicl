@@ -5,6 +5,7 @@
 
 
 #include "Type.hpp"
+#include "Tags.hpp"
 
 #include <cstdint>
 #include <vector>
@@ -20,7 +21,7 @@ private:
 
     Type::u32 ref_id;   // The id of the reference where this alignment occurs.
     Type::u8 aln_type;  // Encodes the type of alignment to follow. Valid alignment types are: 0 — read fw, 1 — read rc.
-    std::vector<Type::variant_t> tag; // Array of specified alignment-level tags for this alignment.
+    Tag_List tag;   // Array of specified alignment-level tags for this alignment.
 
 
 public:
@@ -46,7 +47,7 @@ inline void Aln_Record::add_tag(const T_tag_& val)
 {
     static_assert(is_RAD_type<T_tag_>());
 
-    tag.emplace_back(val);
+    tag.add(val);
 }
 
 }
