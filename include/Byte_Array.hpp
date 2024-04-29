@@ -44,6 +44,10 @@ public:
 
     ~Byte_Array();
 
+    auto size() const { return sz; }
+
+    const auto* data() const { return arr; }
+
     void clear() { sz = 0; }
 
     template <typename T_> void add(const T_& val);

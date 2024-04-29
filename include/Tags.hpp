@@ -5,7 +5,6 @@
 
 
 #include "Type.hpp"
-#include "Buffer.hpp"
 
 #include <cstdint>
 #include <cstddef>
@@ -17,6 +16,9 @@
 
 namespace RAD
 {
+
+
+class Buffer;
 
 
 class Tag_Defn

@@ -7,6 +7,7 @@
 #include "Type.hpp"
 #include "Byte_Array.hpp"
 #include "Alignment_Record.hpp"
+#include "Buffer.hpp"
 
 #include <cstdint>
 #include <vector>
@@ -23,7 +24,7 @@ private:
     Type::u32 aln_count;    // Number of alignment records to follow for this read.
     Type::u16 read_len; // Currently don’t support reads > 65,536bp.
 
-    Byte_Array byte_arr;
+    Byte_Array byte_arr;    // Container for tag-values and alignment records.
 
 
 public:
@@ -34,6 +35,12 @@ public:
     void add_tag(const T_tag_& val);
 
     void add_aln_rec(const Aln_Record& aln_rec);
+
+    const auto& byte_array() const { return byte_arr; }
+
+    std::size_t size_in_bytes() const { return byte_arr.size(); }
+
+    void dump(Buffer& buf) const;
 };
 
 
@@ -60,6 +67,12 @@ inline void Single_End_Read::add_tag(const T_tag_& val)
 inline void Single_End_Read::add_aln_rec(const Aln_Record& aln_rec)
 {
     aln_rec.dump(byte_arr);
+}
+
+
+inline void Single_End_Read::dump(Buffer& buf) const
+{
+    buf.add(byte_arr);
 }
 
 }

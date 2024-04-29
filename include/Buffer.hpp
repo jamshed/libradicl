@@ -5,6 +5,7 @@
 
 
 #include "Type.hpp"
+#include "Byte_Array.hpp"
 
 #include <cstdint>
 #include <cstddef>
@@ -32,8 +33,6 @@ private:
 
     template <typename T_> void add_POD(T_ val);
 
-    void flush();
-
 public:
 
     Buffer(std::size_t cap, std::ofstream& os);
@@ -45,7 +44,15 @@ public:
 
     ~Buffer();
 
+    auto size() const { return sz; }
+
+    auto capacity() const { return cap; }
+
     template <typename T_> void add(const T_& val);
+
+    void add(const Byte_Array& byte_arr);
+
+    void flush();
 };
 
 
@@ -76,12 +83,17 @@ inline void Buffer::add_POD(const T_ val)
 {
     static_assert(std::is_pod<T_>());
 
-    if(sz + sizeof(val) > cap)
-        flush();
-
     assert(sz + sizeof(val) <= cap);
     std::memcpy(reinterpret_cast<char*>(buf + sz), reinterpret_cast<const char*>(&val), sizeof(val));
     sz += sizeof(val);
+}
+
+
+inline void Buffer::add(const Byte_Array& byte_arr)
+{
+    assert(sz + byte_arr.size() <= cap);
+    std::memcpy(reinterpret_cast<char*>(buf + sz), reinterpret_cast<const char*>(byte_arr.data()), byte_arr.size());
+    sz += byte_arr.size();
 }
 
 
