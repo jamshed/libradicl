@@ -75,7 +75,7 @@ typedef RAD_Type<double> f64;
 typedef RAD_Type<std::string> str;
 
 
-typedef boost::variant<Type::null, Type::b, Type::u8, Type::u16, Type::u64, Type::f32, Type::f64, Type::str> variant_t;
+typedef boost::variant<Type::null, Type::b, Type::u8, Type::u16, Type::u32, Type::u64, Type::f32, Type::f64, Type::str> variant_t;
 
 }
 
