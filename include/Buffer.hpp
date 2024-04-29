@@ -44,6 +44,8 @@ public:
 
     ~Buffer();
 
+    auto empty() const { return sz == 0; }
+
     auto size() const { return sz; }
 
     auto capacity() const { return cap; }

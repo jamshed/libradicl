@@ -34,12 +34,28 @@ private:
     std::ofstream output;
 
 
+    void flush_chunk();
+
+
 public:
 
     RAD_Writer(const Header& header, const Tag_Defn& tag_defn, const std::string& op_file_path, std::size_t buf_cap = buf_cap_default);
 
     void add(const Single_End_Read& read_rec);
+
+    void close();
 };
+
+
+inline void RAD_Writer::flush_chunk()
+{
+    const Type::u32 chunk_sz = buf.size();
+    output.write(reinterpret_cast<const char*>(&chunk_sz), sizeof(chunk_sz));
+    output.write(reinterpret_cast<const char*>(&read_c_in_buf), sizeof(read_c_in_buf));
+
+    buf.flush();
+    read_c_in_buf = 0;
+}
 
 }
 
