@@ -11,6 +11,7 @@
 
 #include <cstdint>
 #include <vector>
+#include <cassert>
 
 
 namespace RAD
@@ -59,6 +60,7 @@ template <typename T_tag_>
 inline void Single_End_Read::add_tag(const T_tag_& val)
 {
     static_assert(is_RAD_type<T_tag_>());
+    assert(byte_arr.empty());
 
     byte_arr.add(val);
 }

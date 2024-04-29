@@ -44,6 +44,8 @@ public:
 
     ~Byte_Array();
 
+    auto empty() const { return sz == 0; }
+
     auto size() const { return sz; }
 
     const auto* data() const { return arr; }
