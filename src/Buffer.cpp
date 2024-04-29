@@ -1,6 +1,8 @@
 
 #include "Buffer.hpp"
 
+#include <cstdlib>
+
 
 namespace RAD
 {

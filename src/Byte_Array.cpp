@@ -1,6 +1,7 @@
 
 #include "Byte_Array.hpp"
 
+#include <cstdlib>
 #include <cassert>
 
 

@@ -64,7 +64,7 @@ private:
 
     public:
 
-        Writer(T_sink_& sink): sink(sink) {}
+        explicit Writer(T_sink_& sink): sink(sink) {}
 
         template <typename T_>
         void operator()(const T_& operand) const { sink.add(operand); }

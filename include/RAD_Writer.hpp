@@ -39,7 +39,7 @@ private:
 
 public:
 
-    RAD_Writer(const Header& header, const Tag_Defn& tag_defn, const std::string& op_file_path, std::size_t buf_cap = buf_cap_default);
+    explicit RAD_Writer(const Header& header, const Tag_Defn& tag_defn, const std::string& op_file_path, std::size_t buf_cap = buf_cap_default);
 
     void add(const Single_End_Read& read_rec);
 

@@ -10,7 +10,6 @@
 #include "Buffer.hpp"
 
 #include <cstdint>
-#include <vector>
 #include <cassert>
 
 

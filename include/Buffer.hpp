@@ -10,7 +10,6 @@
 #include <cstdint>
 #include <cstddef>
 #include <cstring>
-#include <cstdlib>
 #include <fstream>
 #include <type_traits>
 #include <cassert>
@@ -35,7 +34,7 @@ private:
 
 public:
 
-    Buffer(std::size_t cap, std::ofstream& os);
+    explicit Buffer(std::size_t cap, std::ofstream& os);
 
     Buffer(const Buffer&) = delete;
     Buffer& operator=(const Buffer&) = delete;
@@ -61,14 +60,9 @@ public:
 template <typename T_>
 inline void Buffer::add(const T_& val)
 {
-    static_assert(is_RAD_type<T_>());
+    static_assert(is_RAD_type<T_>() && !std::is_same<T_, Type::null>());
     add_POD(val.val());
 }
-
-
-template <>
-inline void Buffer::add<Type::null>(const Type::null&)
-{}
 
 
 template <>

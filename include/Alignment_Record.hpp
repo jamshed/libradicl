@@ -9,7 +9,6 @@
 #include "Byte_Array.hpp"
 
 #include <cstdint>
-#include <vector>
 
 
 namespace RAD

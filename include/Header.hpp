@@ -15,7 +15,6 @@
 namespace RAD
 {
 
-
 class Header
 {
 private:
@@ -28,11 +27,6 @@ private:
 public:
 
     explicit Header(bool is_paired, uint64_t ref_count, const std::vector<std::string>& refs, uint64_t num_chunks = 0);
-
-    Header(const Header&) = default;
-    Header(Header&&) = default;
-    Header& operator=(const Header&) = default;
-    Header& operator=(Header&&) = default;
 
     void write(Buffer& buf) const;
 };

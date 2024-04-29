@@ -9,7 +9,6 @@
 
 #include <cstdint>
 #include <cstddef>
-#include <cstdlib>
 #include <cassert>
 
 
@@ -35,7 +34,7 @@ private:
 
 public:
 
-    Byte_Array(std::size_t cap = cap_default);
+    explicit Byte_Array(std::size_t cap = cap_default);
 
     Byte_Array(const Byte_Array&) = delete;
     Byte_Array(Byte_Array&&) = delete;
