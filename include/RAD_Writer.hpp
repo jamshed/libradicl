@@ -46,17 +46,6 @@ public:
     void close();
 };
 
-
-inline void RAD_Writer::flush_chunk()
-{
-    const Type::u32 chunk_sz = buf.size();
-    output.write(reinterpret_cast<const char*>(&chunk_sz), sizeof(chunk_sz));
-    output.write(reinterpret_cast<const char*>(&read_c_in_buf), sizeof(read_c_in_buf));
-
-    buf.flush();
-    read_c_in_buf = 0;
-}
-
 }
 
 
