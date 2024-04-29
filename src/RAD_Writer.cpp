@@ -20,13 +20,12 @@ RAD_Writer::RAD_Writer(const Header& header, const Tag_Defn& tag_defn, const std
 
 void RAD_Writer::add(const Single_End_Read& read_rec)
 {
-    if(buf.size() + read_rec.size_in_bytes() <= buf.capacity())
-    {
-        buf.add(read_rec.byte_array());
-        read_c_in_buf++;
-    }
-    else
+    if(buf.size() + read_rec.size_in_bytes() > buf.capacity())
         flush_chunk();
+
+    assert(buf.size() + read_rec.size_in_bytes() <= buf.capacity());
+    buf.add(read_rec.byte_array());
+    read_c_in_buf++;
 }
 
 
