@@ -25,3 +25,11 @@ target_compile_options(libradicl PRIVATE ${COMPILE_FLAGS})
 
 install(TARGETS libradicl
         DESTINATION lib)
+
+
+add_executable(test test.cpp)
+
+target_include_directories(test PRIVATE ${INCLUDE_DIR})
+target_compile_options(test PRIVATE ${COMPILE_FLAGS})
+target_compile_options(test PRIVATE ${OPTIMIZE_FLAGS})
+target_link_libraries(test libradicl)
