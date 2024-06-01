@@ -12,7 +12,7 @@ Header::Header(const bool is_paired, const uint64_t ref_count, const std::vector
     , ref_count(ref_count)
     , num_chunks(num_chunks)
 {
-    assert(ref_names.size() == ref_count);
+    assert(refs.size() == ref_count);
 
     ref_names.reserve(ref_count);
     for(const auto& v : refs)
