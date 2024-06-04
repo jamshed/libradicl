@@ -28,5 +28,6 @@ if(NOT CMAKE_BUILD_TYPE)
     set(CMAKE_BUILD_TYPE Release CACHE STRING "Build type" FORCE)
 endif()
 
+set(LIBRADICL_TOP_DIR ${CMAKE_CURRENT_SOURCE_DIR})
 
 add_subdirectory(src)

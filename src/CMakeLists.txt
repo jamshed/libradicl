@@ -1,5 +1,6 @@
 
-set(INCLUDE_DIR ${CMAKE_SOURCE_DIR}/include)
+set(INCLUDE_DIR ${LIBRADICL_TOP_DIR}/include)
+message(STATUS "libradicl include directory : ${INCLUDE_DIR}")
 
 
 set(SRC
@@ -11,19 +12,19 @@ set(SRC
 )
 
 
-add_library(libradicl STATIC ${SRC})
+add_library(radicl STATIC ${SRC})
 
 
-target_include_directories(libradicl PRIVATE ${INCLUDE_DIR})
+target_include_directories(radicl PRIVATE ${INCLUDE_DIR})
 
 
 set(COMPILE_FLAGS ${WARNING_FLAGS} ${OPTIMIZE_FLAGS})
 
 
-target_compile_options(libradicl PRIVATE ${COMPILE_FLAGS})
+target_compile_options(radicl PRIVATE ${COMPILE_FLAGS})
 
 
-install(TARGETS libradicl
+install(TARGETS radicl
         DESTINATION lib)
 
 
@@ -32,4 +33,4 @@ add_executable(test test.cpp)
 target_include_directories(test PRIVATE ${INCLUDE_DIR})
 target_compile_options(test PRIVATE ${COMPILE_FLAGS})
 target_compile_options(test PRIVATE ${OPTIMIZE_FLAGS})
-target_link_libraries(test libradicl)
+target_link_libraries(test radicl)
