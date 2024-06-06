@@ -20,7 +20,7 @@ class Byte_Array
 
 private:
 
-    static constexpr std::size_t cap_default = 4 * 1024;    // 4KB.
+    static constexpr std::size_t cap_default = 512 * 1024 * 1024;   // 512 MB.
     std::size_t cap;
 
     uint8_t* arr;
