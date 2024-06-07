@@ -15,6 +15,8 @@ RAD_Writer::RAD_Writer(const Header& header, const Tag_Defn& tag_defn, const std
 {
     header.write(buf);
     tag_defn.write(buf);
+
+    buf.flush();
 }
 
 
