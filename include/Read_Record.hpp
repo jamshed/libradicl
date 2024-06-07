@@ -44,29 +44,29 @@ public:
 class Single_End_Read : public Read
 {
 
-private:
+// private:
 
-    Type::u16 read_len; // Currently don’t support reads > 65,536bp.
+    // Type::u16 read_len; // Currently don’t support reads > 65,536bp.
 
 
 public:
 
-    void set(uint32_t aln_count, uint16_t read_len);
+    void set(uint32_t aln_count);
 };
 
 
 class Paired_End_Read : public Read
 {
 
-private:
+// private:
 
-    Type::u16 read_l_end_len;
-    Type::u16 read_r_end_len;
+//     Type::u16 read_l_end_len;
+//     Type::u16 read_r_end_len;
 
 
 public:
 
-    void set(uint32_t aln_count, uint16_t read_l_end_len, uint16_t read_r_end_len);
+    void set(uint32_t aln_count);
 
 };
 
@@ -92,27 +92,29 @@ inline void Read::dump(Buffer& buf) const
 }
 
 
-inline void Single_End_Read::set(const uint32_t aln_count, const uint16_t read_len)
+// inline void Single_End_Read::set(const uint32_t aln_count, const uint16_t read_len)
+inline void Single_End_Read::set(const uint32_t aln_count)
 {
     this->aln_count = aln_count;
-    this->read_len = read_len;
+    // this->read_len = read_len;
 
     byte_arr.clear();
     byte_arr.add(this->aln_count);
-    byte_arr.add(this->read_len);
+    // byte_arr.add(this->read_len);
 }
 
 
-inline void Paired_End_Read::set(const uint32_t aln_count, const uint16_t read_l_end_len, const uint16_t read_r_end_len)
+// inline void Paired_End_Read::set(const uint32_t aln_count, const uint16_t read_l_end_len, const uint16_t read_r_end_len)
+inline void Paired_End_Read::set(const uint32_t aln_count)
 {
     this->aln_count = aln_count;
-    this->read_l_end_len = read_l_end_len;
-    this->read_r_end_len = read_r_end_len;
+    // this->read_l_end_len = read_l_end_len;
+    // this->read_r_end_len = read_r_end_len;
 
     byte_arr.clear();
     byte_arr.add(this->aln_count);
-    byte_arr.add(this->read_l_end_len);
-    byte_arr.add(this->read_r_end_len);
+    // byte_arr.add(this->read_l_end_len);
+    // byte_arr.add(this->read_r_end_len);
 }
 
 }

@@ -31,13 +31,12 @@ int main()
     constexpr std::size_t aln_count = 5;
     for(std::size_t i = 0; i < read_example; ++i)
     {
-        read_rec.set(aln_count, 100);
+        read_rec.set(aln_count);
         read_rec.add_tag(RAD::Type::str("dummy-read-name"));
         read_rec.add_tag(RAD::Type::f32(20.5));
 
         for(std::size_t j = 0; j < aln_count; ++j)
         {
-            aln_rec.set(0, 1);
             aln_rec.add_tag(RAD::Type::u32(77));
             aln_rec.add_tag(RAD::Type::f32(99.0));
 
