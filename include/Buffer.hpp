@@ -5,6 +5,7 @@
 
 
 #include "Type.hpp"
+#include "Tags.hpp"
 #include "Byte_Array.hpp"
 
 #include <cstdint>
@@ -62,6 +63,18 @@ inline void Buffer::add(const T_& val)
 {
     static_assert(is_RAD_type<T_>() && !std::is_same<T_, Type::null>());
     add_POD(val.val());
+}
+
+
+template <>
+inline void Buffer::add<Type::null>(const Type::null&)
+{}
+
+
+template <>
+inline void Buffer::add<Tag_List>(const Tag_List& tags)
+{
+    tags.write(*this);
 }
 
 

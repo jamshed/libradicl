@@ -20,7 +20,10 @@ int main()
     tag_defn.add_aln_tag<RAD::Type::u32>("aln_pos");
     tag_defn.add_aln_tag<RAD::Type::f32>("aln_score");
 
-    RAD::RAD_Writer rad_writer(header, tag_defn, "op-RAD-path");
+    RAD::Tag_List file_tag_vals;
+    file_tag_vals.add(RAD::Type::str("ATAC-seq"));
+
+    RAD::RAD_Writer rad_writer(header, tag_defn, file_tag_vals, "op-RAD-path");
 
     RAD::Single_End_Read read_rec;
     RAD::Aln_Record aln_rec;
