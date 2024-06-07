@@ -7,7 +7,7 @@
 namespace RAD
 {
 
-Header::Header(const bool is_paired, const uint64_t ref_count, const std::vector<std::string>& refs, const uint64_t num_chunks):
+Header::Header(const uint8_t is_paired, const uint64_t ref_count, const std::vector<std::string>& refs, const uint64_t num_chunks):
       is_paired(is_paired)
     , ref_count(ref_count)
     , num_chunks(num_chunks)

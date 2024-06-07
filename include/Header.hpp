@@ -26,7 +26,7 @@ private:
 
 public:
 
-    explicit Header(bool is_paired, uint64_t ref_count, const std::vector<std::string>& refs, uint64_t num_chunks = 0);
+    explicit Header(uint8_t is_paired, uint64_t ref_count, const std::vector<std::string>& refs, uint64_t num_chunks = 0);
 
     void write(Buffer& buf) const;
 };

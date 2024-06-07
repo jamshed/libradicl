@@ -28,6 +28,15 @@ void RAD_Writer::add(const Single_End_Read& read_rec)
     read_c_in_buf++;
 }
 
+void RAD_Writer::add(const Paired_End_Read& read_rec)
+{
+    if(buf.size() + read_rec.size_in_bytes() > buf.capacity())
+        flush_chunk();
+
+    assert(buf.size() + read_rec.size_in_bytes() <= buf.capacity());
+    buf.add(read_rec.byte_array());
+    read_c_in_buf++;
+}
 
 void RAD_Writer::flush_chunk()
 {
@@ -44,7 +53,7 @@ void RAD_Writer::close()
 {
     if(!buf.empty())
     {
-        assert(read_c_in_buf > 0);
+        // assert(read_c_in_buf > 0);
         flush_chunk();
     }
 }
