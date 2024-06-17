@@ -23,7 +23,8 @@ int main()
     RAD::Tag_List file_tag_vals;
     file_tag_vals.add(RAD::Type::str("ATAC-seq"));
 
-    RAD::RAD_Writer rad_writer(header, tag_defn, file_tag_vals, "op-RAD-path");
+    RAD::RAD_Writer rad_writer(header, tag_defn, file_tag_vals, "op-RAD-path", 1);
+    const auto token = rad_writer.get_token();
 
     RAD::Read read_rec;
     RAD::Aln_Record aln_rec;
@@ -43,7 +44,7 @@ int main()
             read_rec.add_aln_rec(aln_rec);
         }
 
-        rad_writer.add(read_rec);
+        rad_writer.add(read_rec, token);
     }
 
 

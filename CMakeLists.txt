@@ -23,6 +23,17 @@ set(WARNING_FLAGS -Wall -Wextra -Wpedantic)
 
 set(OPTIMIZE_FLAGS -funroll-loops)
 
+set(COMPILE_FLAGS ${WARNING_FLAGS} ${OPTIMIZE_FLAGS})
+
+
+execute_process(
+    COMMAND getconf LEVEL1_DCACHE_LINESIZE
+    COMMAND tr -d '\n'
+    OUTPUT_VARIABLE L1_CACHE_LINE_SIZE
+)
+
+add_compile_definitions(L1_CACHE_LINE_SIZE=${L1_CACHE_LINE_SIZE})
+
 
 if(NOT CMAKE_BUILD_TYPE)
     set(CMAKE_BUILD_TYPE Release CACHE STRING "Build type" FORCE)

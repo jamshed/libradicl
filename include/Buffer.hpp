@@ -39,7 +39,7 @@ public:
 
     Buffer(const Buffer&) = delete;
     Buffer& operator=(const Buffer&) = delete;
-    Buffer(Buffer&&) = delete;
+    Buffer(Buffer&&);
     Buffer& operator=(Buffer&&) = delete;
 
     ~Buffer();
