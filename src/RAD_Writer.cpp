@@ -7,11 +7,11 @@ namespace RAD
 {
 
 RAD_Writer::RAD_Writer(const Header& header, const Tag_Defn& tag_defn, const Tag_List& file_tag_vals, const std::string& op_file_path, const std::size_t buf_cap):
-      header(header)
+      output(op_file_path, std::ios::out | std::ios::binary)
+    , header(header)
     , tag_defn(tag_defn)
     , buf(buf_cap, output)
     , read_c_in_buf(0)
-    , output(op_file_path, std::ios::out | std::ios::binary)
 {
     header.write(buf);
     tag_defn.write(buf);

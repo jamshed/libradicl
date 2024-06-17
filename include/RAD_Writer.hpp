@@ -24,14 +24,14 @@ class RAD_Writer
 {
 private:
 
+    std::ofstream output;
+
     const Header header;
     const Tag_Defn tag_defn;
 
     static constexpr std::size_t buf_cap_default = 512 * 1024 * 1024;   // 512 MB.
     Buffer buf;
     uint32_t read_c_in_buf;
-
-    std::ofstream output;
 
 
     void flush_chunk();
