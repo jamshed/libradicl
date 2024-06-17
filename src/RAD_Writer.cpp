@@ -43,7 +43,7 @@ void RAD_Writer::add(const Paired_End_Read& read_rec)
 
 void RAD_Writer::flush_chunk()
 {
-    const Type::u32 chunk_sz = buf.size();
+    const Type::u32 chunk_sz = buf.size() + 8;  // +8 for the chunk-header.
     output.write(reinterpret_cast<const char*>(&chunk_sz), sizeof(chunk_sz));
     output.write(reinterpret_cast<const char*>(&read_c_in_buf), sizeof(read_c_in_buf));
 
