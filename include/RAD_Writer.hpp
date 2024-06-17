@@ -17,8 +17,7 @@
 namespace RAD
 {
 
-class Single_End_Read;
-class Paired_End_Read;
+class Read;
 
 class RAD_Writer
 {
@@ -41,8 +40,7 @@ public:
 
     explicit RAD_Writer(const Header& header, const Tag_Defn& tag_defn, const Tag_List& file_tag_vals, const std::string& op_file_path, std::size_t buf_cap = buf_cap_default);
 
-    void add(const Single_End_Read& read_rec);
-    void add(const Paired_End_Read& read_rec);
+    void add(const Read& read_rec);
 
     void close();
 };

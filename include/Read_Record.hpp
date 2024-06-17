@@ -28,6 +28,8 @@ protected:
 
 public:
 
+    void set(uint32_t aln_count);
+
     template <typename T_tag_>
     void add_tag(const T_tag_& val);
 
@@ -38,36 +40,6 @@ public:
     std::size_t size_in_bytes() const { return byte_arr.size(); }
 
     void dump(Buffer& buf) const;
-};
-
-
-class Single_End_Read : public Read
-{
-
-// private:
-
-    // Type::u16 read_len; // Currently don’t support reads > 65,536bp.
-
-
-public:
-
-    void set(uint32_t aln_count);
-};
-
-
-class Paired_End_Read : public Read
-{
-
-// private:
-
-//     Type::u16 read_l_end_len;
-//     Type::u16 read_r_end_len;
-
-
-public:
-
-    void set(uint32_t aln_count);
-
 };
 
 
@@ -92,29 +64,12 @@ inline void Read::dump(Buffer& buf) const
 }
 
 
-// inline void Single_End_Read::set(const uint32_t aln_count, const uint16_t read_len)
-inline void Single_End_Read::set(const uint32_t aln_count)
+inline void Read::set(const uint32_t aln_count)
 {
     this->aln_count = aln_count;
-    // this->read_len = read_len;
 
     byte_arr.clear();
     byte_arr.add(this->aln_count);
-    // byte_arr.add(this->read_len);
-}
-
-
-// inline void Paired_End_Read::set(const uint32_t aln_count, const uint16_t read_l_end_len, const uint16_t read_r_end_len)
-inline void Paired_End_Read::set(const uint32_t aln_count)
-{
-    this->aln_count = aln_count;
-    // this->read_l_end_len = read_l_end_len;
-    // this->read_r_end_len = read_r_end_len;
-
-    byte_arr.clear();
-    byte_arr.add(this->aln_count);
-    // byte_arr.add(this->read_l_end_len);
-    // byte_arr.add(this->read_r_end_len);
 }
 
 }

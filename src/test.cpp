@@ -25,7 +25,7 @@ int main()
 
     RAD::RAD_Writer rad_writer(header, tag_defn, file_tag_vals, "op-RAD-path");
 
-    RAD::Single_End_Read read_rec;
+    RAD::Read read_rec;
     RAD::Aln_Record aln_rec;
     constexpr std::size_t read_example = 10;
     constexpr std::size_t aln_count = 5;
