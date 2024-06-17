@@ -38,6 +38,7 @@ int main()
 
         for(std::size_t j = 0; j < aln_count; ++j)
         {
+            aln_rec.clear();
             aln_rec.add_tag(RAD::Type::u32(77));
             aln_rec.add_tag(RAD::Type::f32(99.0));
 
