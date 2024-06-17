@@ -21,7 +21,7 @@ RAD_Writer::RAD_Writer(const Header& header, const Tag_Defn& tag_defn, const Tag
 }
 
 
-void RAD_Writer::add(const Single_End_Read& read_rec)
+void RAD_Writer::add(const Read& read_rec)
 {
     if(buf.size() + read_rec.size_in_bytes() > buf.capacity())
         flush_chunk();
@@ -31,15 +31,15 @@ void RAD_Writer::add(const Single_End_Read& read_rec)
     read_c_in_buf++;
 }
 
-void RAD_Writer::add(const Paired_End_Read& read_rec)
-{
-    if(buf.size() + read_rec.size_in_bytes() > buf.capacity())
-        flush_chunk();
+// void RAD_Writer::add(const Paired_End_Read& read_rec)
+// {
+//     if(buf.size() + read_rec.size_in_bytes() > buf.capacity())
+//         flush_chunk();
 
-    assert(buf.size() + read_rec.size_in_bytes() <= buf.capacity());
-    buf.add(read_rec.byte_array());
-    read_c_in_buf++;
-}
+//     assert(buf.size() + read_rec.size_in_bytes() <= buf.capacity());
+//     buf.add(read_rec.byte_array());
+//     read_c_in_buf++;
+// }
 
 void RAD_Writer::flush_chunk()
 {

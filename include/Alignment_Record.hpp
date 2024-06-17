@@ -26,7 +26,7 @@ private:
 
 public:
 
-    // void set(uint32_t ref_id, uint8_t aln_type);
+    void set();
 
     template <typename T_tag_>
     void add_tag(const T_tag_& val);
