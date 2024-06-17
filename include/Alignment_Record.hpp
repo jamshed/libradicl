@@ -35,13 +35,13 @@ public:
 };
 
 
-// inline void Aln_Record::set(const uint32_t ref_id, const uint8_t aln_type)
-// {
-//     this->ref_id = ref_id;
-//     this->aln_type = aln_type;
+inline void Aln_Record::set()
+{
+    // this->ref_id = ref_id;
+    // this->aln_type = aln_type;
 
-//     tag.clear();
-// }
+    tag.clear();
+}
 
 
 template <typename T_tag_>
