@@ -17,11 +17,9 @@ add_library(radicl STATIC ${SRC})
 
 target_include_directories(radicl PRIVATE ${INCLUDE_DIR})
 
-
-set(COMPILE_FLAGS ${WARNING_FLAGS} ${OPTIMIZE_FLAGS})
-
-
 target_compile_options(radicl PRIVATE ${COMPILE_FLAGS})
+
+target_link_options(radicl PRIVATE ${LINK_FLAGS})
 
 
 install(TARGETS radicl
@@ -32,5 +30,5 @@ add_executable(test test.cpp)
 
 target_include_directories(test PRIVATE ${INCLUDE_DIR})
 target_compile_options(test PRIVATE ${COMPILE_FLAGS})
-target_compile_options(test PRIVATE ${OPTIMIZE_FLAGS})
+target_link_options(test PRIVATE ${LINK_FLAGS})
 target_link_libraries(test radicl)

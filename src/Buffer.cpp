@@ -15,6 +15,16 @@ Buffer::Buffer(const std::size_t cap, std::ofstream& os):
 {}
 
 
+Buffer::Buffer(Buffer&& rhs):
+      cap(rhs.cap)
+    , buf(rhs.buf)
+    , sz(rhs.sz)
+    , os(rhs.os)
+{
+    rhs.buf = nullptr;
+}
+
+
 Buffer::~Buffer()
 {
     std::free(buf);

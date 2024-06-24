@@ -26,7 +26,7 @@ private:
 
 public:
 
-    void set();
+    void clear();
 
     template <typename T_tag_>
     void add_tag(const T_tag_& val);
@@ -35,11 +35,8 @@ public:
 };
 
 
-inline void Aln_Record::set()
+inline void Aln_Record::clear()
 {
-    // this->ref_id = ref_id;
-    // this->aln_type = aln_type;
-
     tag.clear();
 }
 
