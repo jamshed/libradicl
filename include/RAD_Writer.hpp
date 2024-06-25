@@ -21,6 +21,8 @@ namespace RAD
 
 class Read;
 
+class Token;
+
 class RAD_Writer
 {
 private:
@@ -41,17 +43,6 @@ private:
     void flush_chunk(std::size_t w_id);
 
 
-    class Token
-    {
-    public:
-
-        uint64_t val;
-
-        Token(const uint64_t val): val(val)
-        {}
-    };
-
-
 public:
 
     explicit RAD_Writer(const Header& header, const Tag_Defn& tag_defn, const Tag_List& file_tag_vals, const std::string& op_file_path, std::size_t writer_count, std::size_t buf_cap = buf_cap_default);
@@ -61,6 +52,19 @@ public:
     void add(const Read& read_rec, const Token& token);
 
     void close();
+};
+
+
+class Token
+{
+    friend class RAD_Writer;
+
+private:
+
+    uint64_t val;
+
+    Token(const uint64_t val): val(val)
+    {}
 };
 
 }

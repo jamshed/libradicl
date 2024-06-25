@@ -27,7 +27,7 @@ RAD_Writer::RAD_Writer(const Header& header, const Tag_Defn& tag_defn, const Tag
 }
 
 
-const RAD_Writer::Token RAD_Writer::get_token()
+const Token RAD_Writer::get_token()
 {
     lock.lock();
     Token token(worker_c++);
