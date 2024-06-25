@@ -56,7 +56,7 @@ void RAD_Writer::flush_chunk(const std::size_t w_id)
     auto& read_c_in_buf = read_c_in_buf_[w_id].data();
     assert(!buf.empty() && read_c_in_buf > 0);
 
-    const Type::u32 chunk_sz = buf.size();
+    const Type::u32 chunk_sz = buf.size() + 8;  // +8 for the chunk-header.
 
     lock.lock();
     output.write(reinterpret_cast<const char*>(&chunk_sz), sizeof(chunk_sz));
