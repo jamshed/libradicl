@@ -39,7 +39,6 @@ private:
     uint64_t worker_c;
     Spin_Lock lock;
 
-
     void flush_chunk(std::size_t w_id);
 
 
