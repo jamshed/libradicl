@@ -4,6 +4,9 @@
 #include "Read_Record.hpp"
 #include "Byte_Array.hpp"
 #include "Tags.hpp"
+#include <cstddef>
+#include <cstdint>
+#include <vector>
 
 
 int main()
@@ -13,6 +16,7 @@ int main()
 
     RAD::Tag_Defn tag_defn;
     tag_defn.add_file_tag<RAD::Type::str>("read_tech");
+    tag_defn.add_file_tag<RAD::Type::v_u64>("ref-lens");
 
     tag_defn.add_read_tag<RAD::Type::str>("read_name");
     tag_defn.add_read_tag<RAD::Type::f32>("avg_read_qual");
@@ -22,6 +26,14 @@ int main()
 
     RAD::Tag_List file_tag_vals;
     file_tag_vals.add(RAD::Type::str("ATAC-seq"));
+
+    const std::size_t ref_count = 10;
+    std::vector<uint64_t> len;
+    for(std::size_t i = 0; i < ref_count; ++i)
+        len.push_back(250 + i);
+
+    file_tag_vals.add(RAD::Type::v_u64(len));
+
 
     RAD::RAD_Writer rad_writer(header, tag_defn, file_tag_vals, "op-RAD-path", 1);
     const auto token = rad_writer.get_token();

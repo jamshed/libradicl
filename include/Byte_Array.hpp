@@ -79,6 +79,15 @@ inline void Byte_Array::add<Type::str>(const Type::str& s)
 
 
 template <>
+inline void Byte_Array::add<Type::v_u64>(const Type::v_u64& s)
+{
+    add(Type::u64(s.val().size()));
+    for(const auto v : s.val())
+        add_POD(v);
+}
+
+
+template <>
 inline void Byte_Array::add<Tag_List>(const Tag_List& tag)
 {
     tag.write(*this);
