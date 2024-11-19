@@ -13,8 +13,15 @@ void Tag_Defn::write(Buffer& buf) const
         {
             buf.add(Type::u16(vec.size()));
             for(const auto& v : vec)
-                buf.add(v.first),
+            {
+                buf.add(v.first);
                 buf.add(v.second);
+                if(v.second.val() == 7)
+                {
+                    buf.add(Type::u8(4));
+                    buf.add(Type::u8(4));
+                }
+            }
         };
 
     write_tag_vec(file_tag);
