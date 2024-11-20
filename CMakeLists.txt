@@ -33,6 +33,7 @@ execute_process(
 )
 
 add_compile_definitions(L1_CACHE_LINE_SIZE=${L1_CACHE_LINE_SIZE})
+add_compile_definitions(CMAKE_EXPORT_COMPILE_COMMANDS)  # For better `clangd` scanning.
 
 
 if(NOT CMAKE_BUILD_TYPE)

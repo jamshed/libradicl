@@ -87,6 +87,15 @@ inline void Buffer::add<Type::str>(const Type::str& val)
 }
 
 
+template <>
+inline void Buffer::add<Type::v_u64>(const Type::v_u64& val)
+{
+    add(Type::u64(val.val().size()));
+    for(const auto v : val.val())
+        add_POD(v);
+}
+
+
 template <typename T_>
 inline void Buffer::add_POD(const T_ val)
 {

@@ -6,8 +6,6 @@
 
 #include "Type.hpp"
 
-#include <cstdint>
-#include <cstddef>
 #include <vector>
 #include <string>
 #include <utility>

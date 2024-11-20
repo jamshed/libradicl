@@ -9,6 +9,7 @@
 #include <string>
 #include <cstdint>
 #include <type_traits>
+#include <vector>
 
 
 namespace RAD
@@ -29,9 +30,9 @@ public:
 
     RAD_Type() {}
 
-    RAD_Type(const T_ val): val_(val) {}
+    RAD_Type(const T_& val): val_(val) {}
 
-    auto val() const { return val_; }
+    const auto& val() const { return val_; }
 
     auto operator()() const { return val_; }
 
@@ -48,6 +49,7 @@ public:
         if constexpr(is_same<T_, float>())          return 5;
         if constexpr(is_same<T_, double>())         return 6;
         // TODO: no support for arbitrary arrays as of now.
+        if constexpr(is_same<T_, std::vector<uint64_t>>())  return 7;
         if constexpr(is_same<T_, std::string>())    return 8;
 
         return 255;
@@ -71,11 +73,12 @@ typedef RAD_Type<uint32_t> u32;
 typedef RAD_Type<uint64_t> u64;
 typedef RAD_Type<float> f32;
 typedef RAD_Type<double> f64;
+typedef RAD_Type<std::vector<uint64_t>> v_u64;
 // TODO: no support for arbitrary arrays as of now.
 typedef RAD_Type<std::string> str;
 
 
-typedef boost::variant<Type::null, Type::b, Type::u8, Type::u16, Type::u32, Type::u64, Type::f32, Type::f64, Type::str> variant_t;
+typedef boost::variant<Type::null, Type::b, Type::u8, Type::u16, Type::u32, Type::u64, Type::f32, Type::f64, Type::v_u64, Type::str> variant_t;
 
 }
 
@@ -87,7 +90,8 @@ inline static constexpr auto is_RAD_type()
     using namespace Type;
     return  is_same<T_, null>() || is_same<T_, b>() ||
             is_same<T_, u8>() || is_same<T_, u16>() || is_same<T_, u32>() || is_same<T_, u64>() ||
-            is_same<T_, f32>() || is_same<T_, f64>() || is_same<T_, str>();
+            is_same<T_, f32>() || is_same<T_, f64>() ||
+            is_same<T_, v_u64>() || is_same<T_, str>();
 }
 
 }
