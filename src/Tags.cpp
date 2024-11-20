@@ -16,10 +16,10 @@ void Tag_Defn::write(Buffer& buf) const
             {
                 buf.add(v.first);
                 buf.add(v.second);
-                if(v.second.val() == 7)
+                if(v.second.val() == Type::v_u64::type_id())
                 {
-                    buf.add(Type::u8(4));
-                    buf.add(Type::u8(4));
+                    buf.add(Type::u8(Type::u64::type_id()));
+                    buf.add(Type::u8(Type::u64::type_id()));
                 }
             }
         };
