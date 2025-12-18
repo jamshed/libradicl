@@ -23,10 +23,10 @@ class Buffer
 {
 private:
 
-    const std::size_t cap;
+    const std::size_t cap{0};
 
-    uint8_t* buf;
-    std::size_t sz;
+    uint8_t* buf{nullptr};
+    std::size_t sz{0};
 
     std::ofstream& os;
 
