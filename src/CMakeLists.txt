@@ -32,3 +32,11 @@ target_include_directories(test PRIVATE ${INCLUDE_DIR})
 target_compile_options(test PRIVATE ${COMPILE_FLAGS})
 target_link_options(test PRIVATE ${LINK_FLAGS})
 target_link_libraries(test radicl)
+
+
+add_executable(test_flushable test_flushable.cpp)
+
+target_include_directories(test_flushable PRIVATE ${INCLUDE_DIR})
+target_compile_options(test_flushable PRIVATE ${COMPILE_FLAGS})
+target_link_options(test_flushable PRIVATE ${LINK_FLAGS})
+target_link_libraries(test_flushable radicl)
